@@ -24,11 +24,14 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },
+  "homepage": "https://sahana-gowda01.github.io/NBTHUB-2",
   "workspaces": [
     "src/modules/*"
   ],
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -50,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
