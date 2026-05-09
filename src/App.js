@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import LoginScreen from './components/LoginScreen';
+import { AuthProvider, useAuth } from './context/AuthContext.js';
+import LoginScreen from './components/LoginScreen.js';
 
 // Lazy load role-specific modules
 const TeamleaderModule = lazy(() => import('teamleader/src/App'));
