@@ -62,8 +62,8 @@ export default function LoginScreen() {
       alignItems: 'center'
     },
     logo: {
-      width: '80px',
-      height: '80px',
+      width: '150px',
+      height: '110px',
       marginBottom: '15px'
     },
     title: {
