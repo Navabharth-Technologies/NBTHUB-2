@@ -52,9 +52,9 @@ export default function LoginScreen() {
     card: {
       backgroundColor: 'rgba(255, 255, 255, 0.95)',
       backdropFilter: 'blur(20px)',
-      borderRadius: '40px',
-      padding: '40px',
-      width: '100%',
+      borderRadius: winWidth < 768 ? '30px' : '40px',
+      padding: winWidth < 768 ? '25px 20px' : '40px',
+      width: winWidth < 768 ? '88%' : '100%',
       maxWidth: '440px',
       boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
       display: 'flex',
@@ -62,9 +62,9 @@ export default function LoginScreen() {
       alignItems: 'center'
     },
     logo: {
-      width: '150px',
-      height: '110px',
-      marginBottom: '15px'
+      width: winWidth < 768 ? '120px' : '150px',
+      height: winWidth < 768 ? '88px' : '110px',
+      marginBottom: winWidth < 768 ? '10px' : '15px'
     },
     title: {
       fontSize: '28px',
@@ -78,11 +78,11 @@ export default function LoginScreen() {
       color: '#315A9E',
       textTransform: 'uppercase',
       letterSpacing: '1px',
-      marginBottom: '35px'
+      marginBottom: winWidth < 768 ? '20px' : '35px'
     },
     inputGroup: {
       width: '100%',
-      marginBottom: '20px'
+      marginBottom: winWidth < 768 ? '15px' : '20px'
     },
     label: {
       fontSize: '10px',
@@ -131,9 +131,9 @@ export default function LoginScreen() {
       transition: 'transform 0.2s, opacity 0.2s'
     },
     tipBox: {
-      marginTop: '30px',
+      marginTop: winWidth < 768 ? '20px' : '30px',
       backgroundColor: '#f0f9ff',
-      padding: '15px',
+      padding: winWidth < 768 ? '12px' : '15px',
       borderRadius: '16px',
       border: '1px solid #e0f2fe',
       display: 'flex',
