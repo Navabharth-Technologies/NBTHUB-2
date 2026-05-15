@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/NBTHUB-2/static/css/main.e6c13ad2.css",
-    "main.js": "/NBTHUB-2/static/js/main.a7ce03d1.js",
+    "main.js": "/NBTHUB-2/static/js/main.3af8eac0.js",
     "static/css/37.e209413f.chunk.css": "/NBTHUB-2/static/css/37.e209413f.chunk.css",
-    "static/js/37.5d51152d.chunk.js": "/NBTHUB-2/static/js/37.5d51152d.chunk.js",
+    "static/js/37.c4c99701.chunk.js": "/NBTHUB-2/static/js/37.c4c99701.chunk.js",
     "static/js/437.00f78a0b.chunk.js": "/NBTHUB-2/static/js/437.00f78a0b.chunk.js",
     "static/css/128.c5153b86.chunk.css": "/NBTHUB-2/static/css/128.c5153b86.chunk.css",
     "static/js/128.5208f855.chunk.js": "/NBTHUB-2/static/js/128.5208f855.chunk.js",
@@ -21,15 +21,15 @@
     "static/media/imagecopy.png": "/NBTHUB-2/static/media/imagecopy.9d3085437975a0a403d1.png",
     "static/media/login Bg image.png": "/NBTHUB-2/static/media/login Bg image.355a0279bc762049edc2.png",
     "static/media/cartman_no.gif": "/NBTHUB-2/static/media/cartman_no.a6c5cc3222a0ab5ebe8d.gif",
-    "static/media/image.png": "/NBTHUB-2/static/media/image.a6d5cc3420c55ab8953d.png",
     "static/media/logo.png": "/NBTHUB-2/static/media/logo.695694ef62718395c98e.png",
     "static/media/certificate.png": "/NBTHUB-2/static/media/certificate.8a811a02ad0451d2a70e.png",
     "static/media/Background_image.png": "/NBTHUB-2/static/media/Background_image.968dbace2f2062fd9312.png",
+    "static/media/image.png": "/NBTHUB-2/static/media/image.a6d5cc3420c55ab8953d.png",
     "index.html": "/NBTHUB-2/index.html",
     "main.e6c13ad2.css.map": "/NBTHUB-2/static/css/main.e6c13ad2.css.map",
-    "main.a7ce03d1.js.map": "/NBTHUB-2/static/js/main.a7ce03d1.js.map",
+    "main.3af8eac0.js.map": "/NBTHUB-2/static/js/main.3af8eac0.js.map",
     "37.e209413f.chunk.css.map": "/NBTHUB-2/static/css/37.e209413f.chunk.css.map",
-    "37.5d51152d.chunk.js.map": "/NBTHUB-2/static/js/37.5d51152d.chunk.js.map",
+    "37.c4c99701.chunk.js.map": "/NBTHUB-2/static/js/37.c4c99701.chunk.js.map",
     "437.00f78a0b.chunk.js.map": "/NBTHUB-2/static/js/437.00f78a0b.chunk.js.map",
     "128.c5153b86.chunk.css.map": "/NBTHUB-2/static/css/128.c5153b86.chunk.css.map",
     "128.5208f855.chunk.js.map": "/NBTHUB-2/static/js/128.5208f855.chunk.js.map",
@@ -47,6 +47,6 @@
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.a7ce03d1.js"
+    "static/js/main.3af8eac0.js"
   ]
 }
