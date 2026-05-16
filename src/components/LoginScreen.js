@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff, LogIn, Info } from 'lucide-react';
+import { Mail, Lock, EyeOff, Eye, LogIn, Info } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import loginBg from '../assets/imagecopy.png';
@@ -194,7 +194,7 @@ export default function LoginScreen() {
               style={{ cursor: 'pointer', display: 'flex' }}
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <EyeOff size={18} color="#94a3b8" /> : <Eye size={18} color="#94a3b8" />}
+              {showPassword ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
             </div>
           </div>
         </div>
