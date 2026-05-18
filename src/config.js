@@ -1,4 +1,4 @@
-export const BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.1.15:5000';
+export const BASE_URL = import.meta.env.VITE_API_URL || 'http://192.168.1.8:5000';
 export const TEAM_OFFICE_BASE_URL = '/api/etimeoffice';
 export const TEAM_OFFICE_AUTH_TOKEN = 'c3VwcG9ydDpzdXBwb3J0OnN1cHBvcnRAMTp0cnVl';
 
@@ -51,7 +51,7 @@ export const API_ENDPOINTS = {
   MANAGER: (email) => email ? `${BASE_URL}/api/profile/manager?email=${email}` : `${BASE_URL}/api/profile/manager`,
   PROFILE_MANAGER: `${BASE_URL}/api/profile/manager`,
   MANAGER_PROFILE: `${BASE_URL}/api/profile/manager`,
-  
+
   USERS: `${BASE_URL}/api/users`,
   USER_SEARCH: (q) => `${BASE_URL}/api/users/search?q=${q}`,
   STATUS: `${BASE_URL}/api/status`,
@@ -77,7 +77,7 @@ export const API_ENDPOINTS = {
   EMPLOYEE_PROFILE_ALL: `${BASE_URL}/api/admin/employee-profiles`,
   EMPLOYEE_PROFILE_DELETE: (id) => `${BASE_URL}/api/employee-profile/${cleanId(id)}`,
   EMPLOYEE_PROFILE_PUT: (id) => `${BASE_URL}/api/employee-profile/${cleanId(id)}`,
-  
+
   EMPLOYEES: `${BASE_URL}/api/employees`,
   NEW_JOINEE: `${BASE_URL}/api/new-joinee`,
   NEW_JOINEES: `${BASE_URL}/api/new-joinees`,
@@ -92,7 +92,7 @@ export const API_ENDPOINTS = {
   INTERN_UPDATE: (id) => `${BASE_URL}/api/interns/${cleanId(id)}`,
   INTERN_PROMOTE: (id) => `${BASE_URL}/api/interns/promote/${cleanId(id)}`,
   INTERN_DELETE: (id) => `${BASE_URL}/api/interns/${cleanId(id)}`,
-  
+
   JOB_APPLICATIONS: `${BASE_URL}/api/job-applications`,
   JOB_APPLICATION_UPDATE: (id) => `${BASE_URL}/api/job-applications/${cleanId(id)}`,
   JOB_POSTINGS: `${BASE_URL}/api/job-postings`,
@@ -114,7 +114,7 @@ export const API_ENDPOINTS = {
   LEAVE_STATS_MY: (month) => `${BASE_URL}/api/leaves/stats/my${month ? `?month=${month}` : ''}`,
   ADMIN_LEAVE_STATS: `${BASE_URL}/api/admin/leaves/stats`,
   ADMIN_LEAVE_STATS_UPDATE: `${BASE_URL}/api/admin/leaves/stats`,
-  
+
   ATTENDANCE: `${BASE_URL}/api/attendance`,
   ATTENDANCE_LOGS: (userId) => `${BASE_URL}/api/attendance_logs?userId=${cleanId(userId)}`,
   ATTENDANCE_LOGS_GET: `${BASE_URL}/api/attendance_logs`,
@@ -124,7 +124,7 @@ export const API_ENDPOINTS = {
   ATTENDANCE_GAPS: (userId) => `${BASE_URL}/api/attendance/gaps/${cleanId(userId)}`,
   ORGANIZATIONAL_ATTENDANCE: `${BASE_URL}/api/manager/attendance`,
   ATTENDANCE_LOGS_BY_USER: (userId) => `${BASE_URL}/api/attendance_logs?userId=${userId}`,
-  
+
   HOLIDAYS: `${BASE_URL}/api/holidays`,
   BIRTHDAYS: `${BASE_URL}/api/birthdays`,
 
@@ -147,8 +147,8 @@ export const API_ENDPOINTS = {
   TASKS_BY_MANAGER: (managerId) => `${BASE_URL}/api/tasks/manager/${cleanId(managerId)}`,
   TASKS_BY_TEAM: (teamName) => `${BASE_URL}/api/tasks/team/${teamName}`,
   TEAM_REPORTS: (managerId) => `${BASE_URL}/api/task-updates`,
-  MASTER_TASKS_GET: `${BASE_URL}/api/tasks/all-assigned`, 
-  
+  MASTER_TASKS_GET: `${BASE_URL}/api/tasks/all-assigned`,
+
   TEAMS: `${BASE_URL}/api/teams`,
   TEAM: (id) => `${BASE_URL}/api/subordinates/${cleanId(id)}`,
   SUBORDINATES: (userId) => `${BASE_URL}/api/subordinates/${userId}`,
@@ -180,7 +180,7 @@ export const API_ENDPOINTS = {
   RESIGNATION_UPDATE: (id) => `${BASE_URL}/api/admin/resignations/${cleanId(id)}/review`,
   TEAM_RESIGNATIONS: (tlId) => `${BASE_URL}/api/resignations/team/${cleanId(tlId)}`,
   REVOKE_RESIGNATION: (id) => `${BASE_URL}/api/resignations/revoke/${cleanId(id)}`,
-  
+
   PAYSLIPS: `${BASE_URL}/api/payslips`,
   MY_PAYSLIPS: (userId) => `${BASE_URL}/api/pay-slips/my`,
   PAY_SLIP_POST: `${BASE_URL}/api/pay_slip`,
@@ -193,7 +193,7 @@ export const API_ENDPOINTS = {
   SUPPORT_TICKETS: `${BASE_URL}/api/support-tickets`,
   UPDATE_TICKET: (id) => `${BASE_URL}/api/support-tickets/${cleanId(id)}`,
   SUPPORT_AGENTS: `${BASE_URL}/api/support-agents`,
-  
+
   REWARDS: `${BASE_URL}/api/rewards`,
   REWARDS_MY: `${BASE_URL}/api/rewards/my`,
   REWARDS_ALL: `${BASE_URL}/api/rewards`,
@@ -208,7 +208,7 @@ export const API_ENDPOINTS = {
   REWARDS_GRANT_OPTIONS: `${BASE_URL}/api/rewards/grant-options`,
   REWARDS_GRANT: `${BASE_URL}/api/rewards/grant`,
   LEADERBOARD_ALL: `${BASE_URL}/api/employees/leaderboard/all`,
-  
+
   // =========================================================================
   // 8. THREADS (Universal)
   // =========================================================================
@@ -234,10 +234,10 @@ export const API_ENDPOINTS = {
   QUIZ_SUBMIT_SESSION: `${BASE_URL}/api/quizzes/submit-session`,
   QUIZ_SUBMIT_TOTAL: `${BASE_URL}/api/quizzes/submit-total`,
   QUIZ_SUBMIT_ANSWER: `${BASE_URL}/api/fun-quizzes/submit-answer`,
-  
+
   COURSES: `${BASE_URL}/api/courses`,
   BANK_IFSC: (code) => `${BASE_URL}/api/bank/ifsc/${code}`,
-  
+
   // Stats
   DASHBOARD_STATS: `${BASE_URL}/api/dashboard-stats`,
   TEST_DB: `${BASE_URL}/api/test-db`,
