@@ -158,7 +158,7 @@ export default function LoginScreen() {
     <div style={s.container}>
       <form style={s.card} onSubmit={handleSubmit}>
         <img src={logo} alt="NBT Hub Logo" style={s.logo} />
-        <h1 style={s.title}>NBT Hub</h1>
+        <h1 style={s.title}>NBT HUB </h1>
         <div style={s.tagline}>Smarter Solutions for Better Future</div>
 
         {error && <div style={s.error}>{error}</div>}
