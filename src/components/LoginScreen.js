@@ -9,6 +9,7 @@ export default function LoginScreen() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -24,8 +25,17 @@ export default function LoginScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setEmailError('');
+
+    // TLD must be 2–10 letters only (e.g. .com .net .in .yahoo .online)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,10}$/;
+    if (!emailRegex.test(email.trim())) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+
     setLoading(true);
-    const res = await login(email, password);
+    const res = await login(email.trim(), password);
     if (res.success) {
       navigate('/');
     } else {
@@ -62,15 +72,16 @@ export default function LoginScreen() {
       alignItems: 'center'
     },
     logo: {
-      width: winWidth < 768 ? '120px' : '150px',
-      height: winWidth < 768 ? '88px' : '110px',
-      marginBottom: winWidth < 768 ? '10px' : '15px'
+      width: winWidth < 768 ? '140px' : '190px',
+      height: winWidth < 768 ? '105px' : '145px',
+      marginBottom: winWidth < 768 ? '5px' : '2px'
     },
     title: {
       fontSize: '28px',
       fontWeight: '900',
       color: '#0B1E3F',
-      marginBottom: '5px'
+      marginBottom: '5px',
+      marginTop: '-5px'
     },
     tagline: {
       fontSize: '11px',
@@ -165,17 +176,33 @@ export default function LoginScreen() {
 
         <div style={s.inputGroup}>
           <label style={s.label}>Official Identity (Email) <span style={{ color: '#ef4444' }}>*</span></label>
-          <div style={s.inputWrapper}>
-            <Mail size={18} color="#94a3b8" />
+          <div style={{ ...s.inputWrapper, border: emailError ? '1.5px solid #ef4444' : '1.5px solid #f1f5f9' }}>
+            <Mail size={18} color={emailError ? "#ef4444" : "#94a3b8"} />
             <input
               style={s.input}
-              type="email"
-              placeholder="e.g. sahana@navshub.com"
+              type="text"
+              placeholder="e.g:sahana@navshub.com"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                // Strip spaces in real-time — don't allow space characters
+                const sanitized = e.target.value.replace(/\s/g, '');
+                setEmail(sanitized);
+                if (emailError && /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,10}$/.test(sanitized)) {
+                  setEmailError('');
+                }
+              }}
+              onBlur={() => {
+                // Validate format when user leaves the field
+                if (email && !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,10}$/.test(email.trim())) {
+                  setEmailError('Please enter a valid email address.');
+                } else {
+                  setEmailError('');
+                }
+              }}
               required
             />
           </div>
+          {emailError && <div style={{ color: '#ef4444', fontSize: '11px', fontWeight: '600', marginTop: '5px' }}>{emailError}</div>}
         </div>
 
         <div style={s.inputGroup}>
@@ -200,7 +227,7 @@ export default function LoginScreen() {
         </div>
 
         <button style={{ ...s.btn, opacity: loading ? 0.7 : 1 }} type="submit" disabled={loading}>
-          {loading ? 'Connecting...' : <><LogIn size={18} /> Establish Connection</>}
+          {loading ? 'Logging in...' : <><LogIn size={18} /> Login</>}
         </button>
 
         <div style={s.tipBox}>
