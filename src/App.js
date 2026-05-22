@@ -19,8 +19,7 @@ const RoleRouter = () => {
   const userRole = (user.role || '').trim().toLowerCase().replace(/\s+/g, '');
   const userDesig = (user.designation || '').trim().toLowerCase().replace(/\s+/g, '');
   
-  console.log(`DEBUG: [Router] Role: "${userRole}", Designation: "${userDesig}"`);
-
+  // DEBUG Removed
   // 1. Admin roles: Highest priority (including Executive roles)
   const isAdmin = userRole.includes('admin') || userDesig.includes('admin') || 
                   userRole.includes('founder') || userRole.includes('ceo') || 
@@ -28,7 +27,6 @@ const RoleRouter = () => {
                   userDesig.includes('ceo');
   
   if (isAdmin) {
-    console.log('DEBUG: Matched ADMIN');
     return <AdminModule />;
   }
 
@@ -38,7 +36,6 @@ const RoleRouter = () => {
                userDesig === 'pm' || userDesig === 'manager';
   
   if (isPM) {
-    console.log('DEBUG: Matched PM');
     return <PMModule />;
   }
 
@@ -49,7 +46,6 @@ const RoleRouter = () => {
                userRole === 'leadsoftwareengineer' || userDesig === 'leadsoftwareengineer';
   
   if (isTL) {
-    console.log('DEBUG: Matched TEAM LEADER');
     return <TeamleaderModule />;
   }
 
@@ -57,12 +53,10 @@ const RoleRouter = () => {
   const isHR = userRole === 'hr' || userRole.includes('humanresource') || userDesig.includes('humanresource');
   
   if (isHR) {
-    console.log('DEBUG: Matched HR');
     return <HRModule />;
   }
 
   // 5. Employee roles: Final fallback
-  console.log('DEBUG: Fallback to EMPLOYEE');
   return <EmployeeModule />;
 };
 
