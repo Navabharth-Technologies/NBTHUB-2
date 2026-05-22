@@ -181,7 +181,7 @@ export default function LoginScreen() {
             <input
               style={s.input}
               type="text"
-              placeholder="e.g:sahana@navshub.com"
+              placeholder="Enter a Valid Email Adress"
               value={email}
               onChange={(e) => {
                 // Strip spaces in real-time — don't allow space characters
