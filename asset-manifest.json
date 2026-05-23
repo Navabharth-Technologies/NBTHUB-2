@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/NBTHUB-2/static/css/main.e6c13ad2.css",
-    "main.js": "/NBTHUB-2/static/js/main.c174ba08.js",
+    "main.js": "/NBTHUB-2/static/js/main.a815dc08.js",
     "static/css/591.77871595.chunk.css": "/NBTHUB-2/static/css/591.77871595.chunk.css",
     "static/js/591.f8f42803.chunk.js": "/NBTHUB-2/static/js/591.f8f42803.chunk.js",
     "static/js/437.92ef43c4.chunk.js": "/NBTHUB-2/static/js/437.92ef43c4.chunk.js",
     "static/css/296.abf24aec.chunk.css": "/NBTHUB-2/static/css/296.abf24aec.chunk.css",
     "static/js/296.1c689421.chunk.js": "/NBTHUB-2/static/js/296.1c689421.chunk.js",
     "static/css/459.98feaa4a.chunk.css": "/NBTHUB-2/static/css/459.98feaa4a.chunk.css",
-    "static/js/459.2e952202.chunk.js": "/NBTHUB-2/static/js/459.2e952202.chunk.js",
+    "static/js/459.b6941531.chunk.js": "/NBTHUB-2/static/js/459.b6941531.chunk.js",
     "static/css/967.e02e4067.chunk.css": "/NBTHUB-2/static/css/967.e02e4067.chunk.css",
     "static/js/967.bbd364b6.chunk.js": "/NBTHUB-2/static/js/967.bbd364b6.chunk.js",
     "static/js/453.6f46fa17.chunk.js": "/NBTHUB-2/static/js/453.6f46fa17.chunk.js",
@@ -27,14 +27,14 @@
     "static/media/Background_image.png": "/NBTHUB-2/static/media/Background_image.968dbace2f2062fd9312.png",
     "index.html": "/NBTHUB-2/index.html",
     "main.e6c13ad2.css.map": "/NBTHUB-2/static/css/main.e6c13ad2.css.map",
-    "main.c174ba08.js.map": "/NBTHUB-2/static/js/main.c174ba08.js.map",
+    "main.a815dc08.js.map": "/NBTHUB-2/static/js/main.a815dc08.js.map",
     "591.77871595.chunk.css.map": "/NBTHUB-2/static/css/591.77871595.chunk.css.map",
     "591.f8f42803.chunk.js.map": "/NBTHUB-2/static/js/591.f8f42803.chunk.js.map",
     "437.92ef43c4.chunk.js.map": "/NBTHUB-2/static/js/437.92ef43c4.chunk.js.map",
     "296.abf24aec.chunk.css.map": "/NBTHUB-2/static/css/296.abf24aec.chunk.css.map",
     "296.1c689421.chunk.js.map": "/NBTHUB-2/static/js/296.1c689421.chunk.js.map",
     "459.98feaa4a.chunk.css.map": "/NBTHUB-2/static/css/459.98feaa4a.chunk.css.map",
-    "459.2e952202.chunk.js.map": "/NBTHUB-2/static/js/459.2e952202.chunk.js.map",
+    "459.b6941531.chunk.js.map": "/NBTHUB-2/static/js/459.b6941531.chunk.js.map",
     "967.e02e4067.chunk.css.map": "/NBTHUB-2/static/css/967.e02e4067.chunk.css.map",
     "967.bbd364b6.chunk.js.map": "/NBTHUB-2/static/js/967.bbd364b6.chunk.js.map",
     "453.6f46fa17.chunk.js.map": "/NBTHUB-2/static/js/453.6f46fa17.chunk.js.map",
@@ -47,6 +47,6 @@
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.c174ba08.js"
+    "static/js/main.a815dc08.js"
   ]
 }
