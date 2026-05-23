@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.js';
 import LoginScreen from './components/LoginScreen.js';
 
@@ -14,7 +14,7 @@ const RoleRouter = () => {
   const { user, loading } = useAuth();
 
   if (loading) return <div>Loading...</div>;
-  if (!user) return <LoginScreen />;
+  if (!user) return <Navigate to="/login" replace />;
 
   const userRole = (user.role || '').trim().toLowerCase().replace(/\s+/g, '');
   const userDesig = (user.designation || '').trim().toLowerCase().replace(/\s+/g, '');
