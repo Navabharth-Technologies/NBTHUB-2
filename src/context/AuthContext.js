@@ -59,10 +59,24 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', data.token);
         return { success: true };
       }
-      const err = await res.json();
-      return { success: false, error: err.message || 'Login failed' };
+      let err = {};
+      try { err = await res.json(); } catch (_) {}
+      const msg = (err.message || '').toLowerCase();
+      if (res.status === 401 || msg.includes('password') || msg.includes('incorrect') || msg.includes('wrong')) {
+        return { success: false, errorCode: 'WRONG_PASSWORD', error: err.message || 'Incorrect password. Please try again.' };
+      }
+      if (res.status === 404 || msg.includes('not found') || msg.includes('no user') || msg.includes('email')) {
+        return { success: false, errorCode: 'USER_NOT_FOUND', error: err.message || 'No account found with this email address.' };
+      }
+      if (res.status === 403) {
+        return { success: false, errorCode: 'ACCOUNT_DISABLED', error: err.message || 'Your account has been disabled. Contact admin.' };
+      }
+      return { success: false, errorCode: 'SERVER_ERROR', error: err.message || 'Server error. Please try again later.' };
     } catch (e) {
-      return { success: false, error: 'Connection refused' };
+      if (e instanceof TypeError && (e.message.includes('fetch') || e.message.includes('network') || e.message.includes('Failed'))) {
+        return { success: false, errorCode: 'NO_INTERNET', error: 'No internet connection. Please check your network and try again.' };
+      }
+      return { success: false, errorCode: 'NO_INTERNET', error: 'Unable to reach the server. Please check your internet connection.' };
     }
   };
 
