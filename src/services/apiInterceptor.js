@@ -37,7 +37,12 @@ const setupInterceptors = () => {
       config.headers['x-employee-id'] = empId;
     }
     if (user?.role) {
-      config.headers['x-user-role'] = user.role;
+      let role = user.role;
+      const lower = String(role).toLowerCase();
+      if (lower.includes('lead') || lower === 'tl' || lower.includes('team leader') || lower.includes('teamleader')) {
+        role = 'Project Manager';
+      }
+      config.headers['x-user-role'] = role;
     }
 
     return config;
@@ -79,7 +84,12 @@ const setupInterceptors = () => {
       config.headers['x-employee-id'] = empId;
     }
     if (user?.role && !config.headers['x-user-role']) {
-      config.headers['x-user-role'] = user.role;
+      let role = user.role;
+      const lower = String(role).toLowerCase();
+      if (lower.includes('lead') || lower === 'tl' || lower.includes('team leader') || lower.includes('teamleader')) {
+        role = 'Project Manager';
+      }
+      config.headers['x-user-role'] = role;
     }
 
     return originalFetch(resource, config);
