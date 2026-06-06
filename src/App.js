@@ -12,6 +12,15 @@ const HRModule = lazyWithRetry(() => import('human-resource-app/src/App'));
 const PMModule = lazyWithRetry(() => import('pm-manager-dashboard/src/App'));
 const EmployeeModule = lazyWithRetry(() => import('employee/src/App'));
 
+const GuestRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) return <div>Loading...</div>;
+  if (user) return <Navigate to="/" replace />;
+
+  return children;
+};
+
 const RoleRouter = () => {
   const { user, loading } = useAuth();
 
@@ -63,6 +72,34 @@ const RoleRouter = () => {
 };
 
 function App() {
+  React.useEffect(() => {
+    const handlePopState = (event) => {
+      const hash = window.location.hash;
+      const path = hash.startsWith('#') ? hash.substring(1) : '/';
+      
+      const isLoginOrRoot = path === '/login' || path === '/' || path === '';
+
+      if (isLoginOrRoot) {
+        if (!event.state || !event.state.sentinel) {
+          const targetPath = path === '/login' ? '#/login' : '#/';
+          window.history.pushState({ sentinel: true }, '', targetPath);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    // Initial check: ensure sentinel state is active if we start on /login or /
+    const hash = window.location.hash;
+    const path = hash.startsWith('#') ? hash.substring(1) : '/';
+    if ((path === '/login' || path === '/' || !path) && (!window.history.state || !window.history.state.sentinel)) {
+      const targetPath = path === '/login' ? '#/login' : '#/';
+      window.history.pushState({ sentinel: true }, '', targetPath);
+    }
+
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   return (
     <ErrorBoundary>
       <AuthProvider>
@@ -78,7 +115,7 @@ function App() {
               <Route path="/teamleader/*" element={<TeamleaderModule />} />
 
               {/* 2. Authentication */}
-              <Route path="/login" element={<LoginScreen />} />
+              <Route path="/login" element={<GuestRoute><LoginScreen /></GuestRoute>} />
 
               {/* 3. Dynamic Root Handler (handles /dashboard based on login) */}
               <Route path="/*" element={<RoleRouter />} />
