@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/NBTHUB-2/static/css/main.4efb37a3.css",
-    "main.js": "/NBTHUB-2/static/js/main.e6c43b23.js",
+    "main.js": "/NBTHUB-2/static/js/main.7f451455.js",
     "static/css/36.dff4def7.chunk.css": "/NBTHUB-2/static/css/36.dff4def7.chunk.css",
-    "static/js/36.046c1084.chunk.js": "/NBTHUB-2/static/js/36.046c1084.chunk.js",
-    "static/js/552.c1c62b8e.chunk.js": "/NBTHUB-2/static/js/552.c1c62b8e.chunk.js",
-    "static/css/38.8f30f249.chunk.css": "/NBTHUB-2/static/css/38.8f30f249.chunk.css",
-    "static/js/38.441102b5.chunk.js": "/NBTHUB-2/static/js/38.441102b5.chunk.js",
-    "static/css/411.8218e29c.chunk.css": "/NBTHUB-2/static/css/411.8218e29c.chunk.css",
-    "static/js/411.2c8de647.chunk.js": "/NBTHUB-2/static/js/411.2c8de647.chunk.js",
+    "static/js/36.4812e1a3.chunk.js": "/NBTHUB-2/static/js/36.4812e1a3.chunk.js",
+    "static/js/454.042e9943.chunk.js": "/NBTHUB-2/static/js/454.042e9943.chunk.js",
+    "static/css/38.81b517be.chunk.css": "/NBTHUB-2/static/css/38.81b517be.chunk.css",
+    "static/js/38.92d995fd.chunk.js": "/NBTHUB-2/static/js/38.92d995fd.chunk.js",
+    "static/css/30.c6887fff.chunk.css": "/NBTHUB-2/static/css/30.c6887fff.chunk.css",
+    "static/js/30.27027865.chunk.js": "/NBTHUB-2/static/js/30.27027865.chunk.js",
     "static/css/21.4875f2d5.chunk.css": "/NBTHUB-2/static/css/21.4875f2d5.chunk.css",
     "static/js/21.09452a80.chunk.js": "/NBTHUB-2/static/js/21.09452a80.chunk.js",
     "static/js/206.5c6b0b31.chunk.js": "/NBTHUB-2/static/js/206.5c6b0b31.chunk.js",
     "static/js/52.2da3f669.chunk.js": "/NBTHUB-2/static/js/52.2da3f669.chunk.js",
     "static/js/82.4eccdf5b.chunk.js": "/NBTHUB-2/static/js/82.4eccdf5b.chunk.js",
     "static/js/239.ddbe9a5a.chunk.js": "/NBTHUB-2/static/js/239.ddbe9a5a.chunk.js",
-    "static/js/827.ad62b4ba.chunk.js": "/NBTHUB-2/static/js/827.ad62b4ba.chunk.js",
-    "static/js/277.a334d98e.chunk.js": "/NBTHUB-2/static/js/277.a334d98e.chunk.js",
-    "static/js/492.9c21471f.chunk.js": "/NBTHUB-2/static/js/492.9c21471f.chunk.js",
+    "static/js/247.d15e3930.chunk.js": "/NBTHUB-2/static/js/247.d15e3930.chunk.js",
+    "static/js/261.57fd73fe.chunk.js": "/NBTHUB-2/static/js/261.57fd73fe.chunk.js",
+    "static/js/411.b20fc2a8.chunk.js": "/NBTHUB-2/static/js/411.b20fc2a8.chunk.js",
     "static/media/imagecopy.png": "/NBTHUB-2/static/media/imagecopy.9d3085437975a0a403d1.png",
     "static/media/login Bg image.png": "/NBTHUB-2/static/media/login Bg image.355a0279bc762049edc2.png",
     "static/media/certificate_final.png": "/NBTHUB-2/static/media/certificate_final.99cf2b75b8de11475083.png",
@@ -29,6 +29,6 @@
   },
   "entrypoints": [
     "static/css/main.4efb37a3.css",
-    "static/js/main.e6c43b23.js"
+    "static/js/main.7f451455.js"
   ]
 }
