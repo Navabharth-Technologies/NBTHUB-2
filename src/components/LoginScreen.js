@@ -29,9 +29,20 @@ export default function LoginScreen() {
   const [forgotLoading, setForgotLoading] = useState(false);
   const [showForgotNewPass, setShowForgotNewPass] = useState(false);
   const [showForgotConfirmPass, setShowForgotConfirmPass] = useState(false);
+  const [forgotCountdown, setForgotCountdown] = useState(0);
+
+  React.useEffect(() => {
+    let timer;
+    if (forgotStep === 2 && forgotCountdown > 0) {
+      timer = setInterval(() => {
+        setForgotCountdown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [forgotStep, forgotCountdown]);
 
   const handleRequestOTP = async (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setForgotError('');
     setForgotSuccess('');
 
@@ -51,6 +62,7 @@ export default function LoginScreen() {
       if (res.ok) {
         setForgotSuccess('Security OTP has been dispatched to your email/terminal.');
         setForgotStep(2);
+        setForgotCountdown(30);
       } else {
         const errData = await res.json().catch(() => ({}));
         setForgotError(errData.message || 'OTP dispatch failed. Make sure email exists.');
@@ -459,6 +471,21 @@ export default function LoginScreen() {
                       onChange={e => setForgotOtp(e.target.value.replace(/\D/g, ''))}
                       required
                     />
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                    <span
+                      onClick={() => {
+                        if (forgotCountdown === 0) handleRequestOTP();
+                      }}
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: '850',
+                        color: forgotCountdown > 0 ? '#94a3b8' : '#315A9E',
+                        cursor: forgotCountdown > 0 ? 'not-allowed' : 'pointer'
+                      }}
+                    >
+                      {forgotCountdown > 0 ? `Resend OTP in ${forgotCountdown}s` : 'Resend OTP'}
+                    </span>
                   </div>
                 </div>
 
