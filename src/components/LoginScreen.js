@@ -62,7 +62,7 @@ export default function LoginScreen() {
     }
   };
 
-  const handleResetPassword = async (e) => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setForgotError('');
     setForgotSuccess('');
@@ -71,6 +71,35 @@ export default function LoginScreen() {
       setForgotError('OTP must be exactly 6 digits.');
       return;
     }
+
+    setForgotLoading(true);
+    try {
+      const res = await fetch(`${BASE_URL}/api/password/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: forgotEmail.trim(),
+          otp: forgotOtp.trim()
+        })
+      });
+      if (res.ok) {
+        setForgotSuccess('OTP verified successfully!');
+        setForgotStep(3); // Move to password update
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        setForgotError(errData.message || 'Invalid or expired OTP.');
+      }
+    } catch (err) {
+      setForgotError('Network error. Please try again.');
+    } finally {
+      setForgotLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    setForgotError('');
+    setForgotSuccess('');
 
     if (forgotNewPassword.length < 6) {
       setForgotError('New password must be at least 6 characters.');
@@ -90,15 +119,16 @@ export default function LoginScreen() {
         body: JSON.stringify({
           email: forgotEmail.trim(),
           otp: forgotOtp.trim(),
-          newPassword: forgotNewPassword
+          newPassword: forgotNewPassword,
+          logoutAllDevices: true
         })
       });
       if (res.ok) {
         setForgotSuccess('Password reset successfully! You can now log in.');
-        setForgotStep(3);
+        setForgotStep(4);
       } else {
         const errData = await res.json().catch(() => ({}));
-        setForgotError(errData.message || 'Invalid or expired OTP.');
+        setForgotError(errData.message || 'Error updating password.');
       }
     } catch (err) {
       setForgotError('Network error. Please try again.');
@@ -308,12 +338,14 @@ export default function LoginScreen() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <div
-              style={{ cursor: 'pointer', display: 'flex' }}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
-            </div>
+            {password.length > 0 && (
+              <div
+                style={{ cursor: 'pointer', display: 'flex' }}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
+              </div>
+            )}
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
             <span
@@ -373,7 +405,7 @@ export default function LoginScreen() {
               <div>
                 <h3 style={{ fontSize: '20px', fontWeight: '950', color: '#0B1E3F', margin: 0, letterSpacing: '-0.5px' }}>Forgot Password</h3>
                 <p style={{ fontSize: '13px', color: '#64748b', margin: '2px 0 0', fontWeight: '500' }}>
-                  {forgotStep === 1 ? 'Request a security OTP via email' : forgotStep === 2 ? 'Enter the security OTP and set your passkey' : 'Security credentials updated'}
+                  {forgotStep === 1 ? 'Request a security OTP via email' : forgotStep === 2 ? 'Enter the security OTP to verify' : forgotStep === 3 ? 'Set your new passkey' : 'Security credentials updated'}
                 </p>
               </div>
             </div>
@@ -384,7 +416,7 @@ export default function LoginScreen() {
               </div>
             )}
 
-            {forgotSuccess && forgotStep !== 3 && (
+            {forgotSuccess && forgotStep !== 4 && (
               <div style={{ color: '#16a34a', backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', padding: '12px', borderRadius: '12px', fontSize: '12px', fontWeight: '750', marginBottom: '15px', textAlign: 'center' }}>
                 {forgotSuccess}
               </div>
@@ -413,7 +445,7 @@ export default function LoginScreen() {
             )}
 
             {forgotStep === 2 && (
-              <form onSubmit={handleResetPassword} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+              <form onSubmit={handleVerifyOtp} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 <div style={s.inputGroup}>
                   <label style={s.label}>Security OTP (Terminal) <span style={{ color: '#ef4444' }}>*</span></label>
                   <div style={s.inputWrapper}>
@@ -430,6 +462,14 @@ export default function LoginScreen() {
                   </div>
                 </div>
 
+                <button style={{ ...s.btn, opacity: forgotLoading ? 0.7 : 1 }} type="submit" disabled={forgotLoading}>
+                  {forgotLoading ? 'Verifying OTP...' : 'Verify OTP'}
+                </button>
+              </form>
+            )}
+
+            {forgotStep === 3 && (
+              <form onSubmit={handleResetPassword} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 <div style={s.inputGroup}>
                   <label style={s.label}>New Passkey <span style={{ color: '#ef4444' }}>*</span></label>
                   <div style={s.inputWrapper}>
@@ -442,9 +482,11 @@ export default function LoginScreen() {
                       onChange={e => setForgotNewPassword(e.target.value)}
                       required
                     />
-                    <div style={{ cursor: 'pointer', display: 'flex' }} onClick={() => setShowForgotNewPass(!showForgotNewPass)}>
-                      {showForgotNewPass ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
-                    </div>
+                    {forgotNewPassword.length > 0 && (
+                      <div style={{ cursor: 'pointer', display: 'flex' }} onClick={() => setShowForgotNewPass(!showForgotNewPass)}>
+                        {showForgotNewPass ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -460,9 +502,11 @@ export default function LoginScreen() {
                       onChange={e => setForgotConfirmPassword(e.target.value)}
                       required
                     />
-                    <div style={{ cursor: 'pointer', display: 'flex' }} onClick={() => setShowForgotConfirmPass(!showForgotConfirmPass)}>
-                      {showForgotConfirmPass ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
-                    </div>
+                    {forgotConfirmPassword.length > 0 && (
+                      <div style={{ cursor: 'pointer', display: 'flex' }} onClick={() => setShowForgotConfirmPass(!showForgotConfirmPass)}>
+                        {showForgotConfirmPass ? <Eye size={18} color="#94a3b8" /> : <EyeOff size={18} color="#94a3b8" />}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -472,7 +516,7 @@ export default function LoginScreen() {
               </form>
             )}
 
-            {forgotStep === 3 && (
+            {forgotStep === 4 && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
                 <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#dcfce7', color: '#166534', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>✓</div>
                 <div style={{ color: '#16a34a', fontSize: '13px', fontWeight: '800', textAlign: 'center' }}>
