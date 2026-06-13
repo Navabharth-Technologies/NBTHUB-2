@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/NBTHUB-2/static/css/main.4efb37a3.css",
-    "main.js": "/NBTHUB-2/static/js/main.8738f37e.js",
+    "main.js": "/NBTHUB-2/static/js/main.97f663a3.js",
     "static/css/12.dff4def7.chunk.css": "/NBTHUB-2/static/css/12.dff4def7.chunk.css",
     "static/js/12.65942c1f.chunk.js": "/NBTHUB-2/static/js/12.65942c1f.chunk.js",
     "static/js/454.ace64403.chunk.js": "/NBTHUB-2/static/js/454.ace64403.chunk.js",
-    "static/css/888.81b517be.chunk.css": "/NBTHUB-2/static/css/888.81b517be.chunk.css",
-    "static/js/888.90e58511.chunk.js": "/NBTHUB-2/static/js/888.90e58511.chunk.js",
+    "static/css/529.81b517be.chunk.css": "/NBTHUB-2/static/css/529.81b517be.chunk.css",
+    "static/js/529.b23a3204.chunk.js": "/NBTHUB-2/static/js/529.b23a3204.chunk.js",
     "static/css/513.c6887fff.chunk.css": "/NBTHUB-2/static/css/513.c6887fff.chunk.css",
     "static/js/513.7d61e08e.chunk.js": "/NBTHUB-2/static/js/513.7d61e08e.chunk.js",
     "static/css/363.4875f2d5.chunk.css": "/NBTHUB-2/static/css/363.4875f2d5.chunk.css",
@@ -28,6 +28,6 @@
   },
   "entrypoints": [
     "static/css/main.4efb37a3.css",
-    "static/js/main.8738f37e.js"
+    "static/js/main.97f663a3.js"
   ]
 }
