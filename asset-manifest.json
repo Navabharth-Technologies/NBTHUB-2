@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/NBTHUB-2/static/css/main.4efb37a3.css",
-    "main.js": "/NBTHUB-2/static/js/main.41f9d541.js",
+    "main.js": "/NBTHUB-2/static/js/main.0e7ecb8b.js",
     "static/css/12.dff4def7.chunk.css": "/NBTHUB-2/static/css/12.dff4def7.chunk.css",
     "static/js/12.4fd8f226.chunk.js": "/NBTHUB-2/static/js/12.4fd8f226.chunk.js",
     "static/js/454.2818f524.chunk.js": "/NBTHUB-2/static/js/454.2818f524.chunk.js",
     "static/css/230.81b517be.chunk.css": "/NBTHUB-2/static/css/230.81b517be.chunk.css",
-    "static/js/230.ffb3fd9e.chunk.js": "/NBTHUB-2/static/js/230.ffb3fd9e.chunk.js",
+    "static/js/230.493c48a6.chunk.js": "/NBTHUB-2/static/js/230.493c48a6.chunk.js",
     "static/css/918.c6887fff.chunk.css": "/NBTHUB-2/static/css/918.c6887fff.chunk.css",
     "static/js/918.7e5a56c3.chunk.js": "/NBTHUB-2/static/js/918.7e5a56c3.chunk.js",
     "static/css/43.4875f2d5.chunk.css": "/NBTHUB-2/static/css/43.4875f2d5.chunk.css",
@@ -29,6 +29,6 @@
   },
   "entrypoints": [
     "static/css/main.4efb37a3.css",
-    "static/js/main.41f9d541.js"
+    "static/js/main.0e7ecb8b.js"
   ]
 }
