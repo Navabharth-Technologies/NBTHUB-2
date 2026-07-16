@@ -61,7 +61,8 @@ const RoleRouter = () => {
   }
 
   // 4. HR roles
-  const isHR = userRole === 'hr' || userRole.includes('humanresource') || userDesig.includes('humanresource');
+  const isHR = (userRole === 'hr' || userRole.includes('humanresource') || userDesig.includes('humanresource')) &&
+               String(user.email || '').toLowerCase().trim() !== 'raviaradhya46@gmail.com';
   
   if (isHR) {
     return <HRModule />;
