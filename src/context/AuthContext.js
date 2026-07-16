@@ -12,15 +12,35 @@ if (typeof window !== 'undefined' && !window.__NBT_AUTH_CONTEXT__) {
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUserState] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const adjustLoggedUser = (u) => {
+    if (!u) return u;
+    const email = String(u.email || u.email_id || '').toLowerCase().trim();
+    if (email === 'raviaradhya46@gmail.com') {
+      return {
+        ...u,
+        role: 'New Joinee',
+        designation: 'New Joinee'
+      };
+    }
+    return u;
+  };
+
+  const setUser = (val) => {
+    setUserState(prev => {
+      const next = typeof val === 'function' ? val(prev) : val;
+      return adjustLoggedUser(next);
+    });
+  };
 
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     if (savedUser && token) {
-      const parsed = JSON.parse(savedUser);
-      setUser({ ...parsed, token });
+      const parsed = adjustLoggedUser(JSON.parse(savedUser));
+      setUserState({ ...parsed, token });
       // Fetch latest profile to ensure name/designation are up to date
       fetch(`${API_ENDPOINTS.PROFILE(parsed.email)}`, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -34,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         })
         .then(data => {
           if (data && !data.error) {
-            const updated = { ...parsed, ...data, token };
+            const updated = adjustLoggedUser({ ...parsed, ...data, token });
             setUser(updated);
             localStorage.setItem('user', JSON.stringify(updated));
           }
@@ -53,7 +73,7 @@ export const AuthProvider = ({ children }) => {
       });
       if (res.ok) {
         const data = await res.json();
-        const userWithToken = { ...data.user, token: data.token };
+        const userWithToken = adjustLoggedUser({ ...data.user, token: data.token });
         setUser(userWithToken);
         localStorage.setItem('user', JSON.stringify(userWithToken));
         localStorage.setItem('token', data.token);
@@ -91,7 +111,7 @@ export const AuthProvider = ({ children }) => {
 
     // If localOnly is true, bypass the network request and update context directly
     if (localOnly) {
-      const updatedUser = { ...user, [field]: value };
+      const updatedUser = adjustLoggedUser({ ...user, [field]: value });
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
       return { success: true };
@@ -113,7 +133,7 @@ export const AuthProvider = ({ children }) => {
         })
       });
       if (res.ok) {
-        const updatedUser = { ...user, [field]: value };
+        const updatedUser = adjustLoggedUser({ ...user, [field]: value });
         setUser(updatedUser);
         localStorage.setItem('user', JSON.stringify(updatedUser));
         return { success: true };
@@ -121,7 +141,9 @@ export const AuthProvider = ({ children }) => {
       return { success: false, error: 'Failed to update' };
     } catch (e) {
       // Optimistic update for demo if offline
-      setUser(prev => ({ ...prev, [field]: value }));
+      const updatedUser = adjustLoggedUser({ ...user, [field]: value });
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
       return { success: true };
     }
   };
