@@ -27,8 +27,8 @@ const RoleRouter = () => {
   if (loading) return <div>Loading...</div>;
   if (!user) return <Navigate to="/login" replace />;
 
-  const userRole = (user.role || '').trim().toLowerCase().replace(/\s+/g, '');
-  const userDesig = (user.designation || '').trim().toLowerCase().replace(/\s+/g, '');
+  const userRole = String(user.role || '').trim().toLowerCase().replace(/\s+/g, '');
+  const userDesig = String(user.designation || '').trim().toLowerCase().replace(/\s+/g, '');
   
   // DEBUG Removed
   // 1. Admin roles: Highest priority (including Executive roles)
@@ -50,11 +50,11 @@ const RoleRouter = () => {
     return <PMModule />;
   }
 
-  // 3. Team Leader roles
-  const isTL = userRole === 'teamleader' || userRole === 'tl' || 
+  const isTL = (userRole === 'teamleader' || userRole === 'tl' || 
                userRole.includes('teamlead') || userDesig.includes('teamlead') ||
                userRole.includes('leadengineer') || userDesig.includes('leadengineer') ||
-               userRole === 'leadsoftwareengineer' || userDesig === 'leadsoftwareengineer';
+               userRole === 'leadsoftwareengineer' || userDesig === 'leadsoftwareengineer') &&
+               !userRole.includes('junior') && !userRole.includes('intern');
   
   if (isTL) {
     return <TeamleaderModule />;
