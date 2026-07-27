@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
         return { success: false, errorCode: 'USER_NOT_FOUND', error: err.message || 'No account found with this email address.' };
       }
       if (res.status === 403) {
-        return { success: false, errorCode: 'ACCOUNT_DISABLED', error: err.message || 'Your account has been disabled. Contact admin.' };
+        return { success: false, errorCode: 'ACCOUNT_DISABLED', error: err.message || 'Your account has been disabled. Please contact the HR department for further assistance.' };
       }
       return { success: false, errorCode: 'SERVER_ERROR', error: err.message || 'Server error. Please try again later.' };
     } catch (e) {
