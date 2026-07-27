@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/NBTHUB-2/static/css/main.4efb37a3.css",
-    "main.js": "/NBTHUB-2/static/js/main.1c6fec68.js",
+    "main.js": "/NBTHUB-2/static/js/main.e0e02f11.js",
     "static/css/12.dff4def7.chunk.css": "/NBTHUB-2/static/css/12.dff4def7.chunk.css",
     "static/js/12.c0bdf52b.chunk.js": "/NBTHUB-2/static/js/12.c0bdf52b.chunk.js",
     "static/js/454.2818f524.chunk.js": "/NBTHUB-2/static/js/454.2818f524.chunk.js",
@@ -29,6 +29,6 @@
   },
   "entrypoints": [
     "static/css/main.4efb37a3.css",
-    "static/js/main.1c6fec68.js"
+    "static/js/main.e0e02f11.js"
   ]
 }
