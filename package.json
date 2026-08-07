@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },
-  "homepage": "https://sahana-gowda01.github.io/NBTHUB-2",
+  "homepage": "https://Navabharth-Technologies.github.io/NBTHUB-2",
   "workspaces": [
     "src/modules/*"
   ],
