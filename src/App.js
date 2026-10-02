@@ -6,11 +6,11 @@ import ErrorBoundary from './components/ErrorBoundary.js';
 import { lazyWithRetry } from './utils/lazyWithRetry.js';
 
 // Lazy load role-specific modules with auto-retry mechanisms for high reliability
-const TeamleaderModule = lazyWithRetry(() => import('teamleader/src/App'));
-const AdminModule = lazyWithRetry(() => import('superadmin-dashboard/src/App'));
-const HRModule = lazyWithRetry(() => import('human-resource-app/src/App'));
-const PMModule = lazyWithRetry(() => import('pm-manager-dashboard/src/App'));
-const EmployeeModule = lazyWithRetry(() => import('employee/src/App'));
+const TeamleaderModule = lazyWithRetry(() => import('./modules/teamleader/src/App'));
+const AdminModule = lazyWithRetry(() => import('./modules/admin/src/App'));
+const HRModule = lazyWithRetry(() => import('./modules/hr/src/App'));
+const PMModule = lazyWithRetry(() => import('./modules/pm/src/App'));
+const EmployeeModule = lazyWithRetry(() => import('./modules/employee/src/App'));
 
 const GuestRoute = ({ children }) => {
   const { user, loading } = useAuth();
