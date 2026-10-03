@@ -81,17 +81,17 @@ export const AuthProvider = ({ children }) => {
       }
       let err = {};
       try { err = await res.json(); } catch (_) {}
-      const msg = (err.message || err.error || '').toLowerCase();
+      const msg = (err.message || '').toLowerCase();
       if (res.status === 401 || msg.includes('password') || msg.includes('incorrect') || msg.includes('wrong')) {
-        return { success: false, errorCode: 'WRONG_PASSWORD', error: err.message || err.error || 'Incorrect password. Please try again.' };
+        return { success: false, errorCode: 'WRONG_PASSWORD', error: err.message || 'Incorrect password. Please try again.' };
       }
       if (res.status === 404 || msg.includes('not found') || msg.includes('no user') || msg.includes('email')) {
-        return { success: false, errorCode: 'USER_NOT_FOUND', error: err.message || err.error || 'No account found with this email address.' };
+        return { success: false, errorCode: 'USER_NOT_FOUND', error: err.message || 'No account found with this email address.' };
       }
       if (res.status === 403) {
-        return { success: false, errorCode: 'ACCOUNT_DISABLED', error: err.message || err.error || 'Your account has been disabled. Please contact the HR department for further assistance.' };
+        return { success: false, errorCode: 'ACCOUNT_DISABLED', error: err.message || 'Your account has been disabled. Please contact the HR department for further assistance.' };
       }
-      return { success: false, errorCode: 'SERVER_ERROR', error: err.message || err.error || 'Server error. Please try again later.' };
+      return { success: false, errorCode: 'SERVER_ERROR', error: err.message || 'Server error. Please try again later.' };
     } catch (e) {
       if (e instanceof TypeError && (e.message.includes('fetch') || e.message.includes('network') || e.message.includes('Failed'))) {
         return { success: false, errorCode: 'NO_INTERNET', error: 'No internet connection. Please check your network and try again.' };

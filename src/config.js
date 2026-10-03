@@ -1,13 +1,7 @@
-// Validate the localStorage override URL — skip private/LAN IPs when running on localhost
-const _storedOverride = typeof window !== 'undefined' ? localStorage.getItem('api_override_url') : null;
-const _isPrivateIP = _storedOverride && /https?:\/\/(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/.test(_storedOverride);
-const _isOnLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-const _validOverride = _storedOverride && !(_isPrivateIP && _isOnLocalhost) ? _storedOverride : null;
-
-export const BASE_URL =
-  (typeof window !== 'undefined' && (_validOverride || window.__API_URL__)) ||
+﻿export const BASE_URL =
+  (typeof window !== 'undefined' && (localStorage.getItem('api_override_url') || window.__API_URL__)) ||
   process.env.REACT_APP_API_URL ||
-  (typeof window !== 'undefined' ? `http://${window.location.hostname}:5000` : 'http://localhost:5000');
+  'http://192.168.29.196:5000';
 export const TEAM_OFFICE_BASE_URL = '/api/etimeoffice';
 export const TEAM_OFFICE_AUTH_TOKEN = 'c3VwcG9ydDpzdXBwb3J0OnN1cHBvcnRAMTp0cnVl';
 
@@ -252,3 +246,4 @@ export const API_ENDPOINTS = {
   TEST_DB: `${BASE_URL}/api/test-db`,
   ROSTER: (type) => `${BASE_URL}/api/roster/${type}`,
 };
+
