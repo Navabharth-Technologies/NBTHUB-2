@@ -1,7 +1,7 @@
-﻿export const BASE_URL =
+export const BASE_URL =
   (typeof window !== 'undefined' && (localStorage.getItem('api_override_url') || window.__API_URL__)) ||
   process.env.REACT_APP_API_URL ||
-  'http://192.168.29.196:5000';
+  'https://nbthub.navabharathtechnologies.com';
 export const TEAM_OFFICE_BASE_URL = '/api/etimeoffice';
 export const TEAM_OFFICE_AUTH_TOKEN = 'c3VwcG9ydDpzdXBwb3J0OnN1cHBvcnRAMTp0cnVl';
 
