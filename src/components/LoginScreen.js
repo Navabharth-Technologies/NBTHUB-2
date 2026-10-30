@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Mail, Lock, EyeOff, Eye, LogIn, Info, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -65,7 +65,7 @@ export default function LoginScreen() {
         setForgotCountdown(30);
       } else {
         const errData = await res.json().catch(() => ({}));
-        setForgotError(errData.message || 'OTP dispatch failed. Make sure email exists.');
+        setForgotError(errData.error || errData.message || 'OTP dispatch failed. Make sure email exists.');
       }
     } catch (err) {
       setForgotError('Network error. Please try again.');
@@ -99,7 +99,7 @@ export default function LoginScreen() {
         setForgotStep(3); // Move to password update
       } else {
         const errData = await res.json().catch(() => ({}));
-        setForgotError(errData.message || 'Invalid or expired OTP.');
+        setForgotError(errData.error || errData.message || 'Invalid or expired OTP.');
       }
     } catch (err) {
       setForgotError('Network error. Please try again.');
@@ -140,7 +140,7 @@ export default function LoginScreen() {
         setForgotStep(4);
       } else {
         const errData = await res.json().catch(() => ({}));
-        setForgotError(errData.message || 'Error updating password.');
+        setForgotError(errData.error || errData.message || 'Error updating password.');
       }
     } catch (err) {
       setForgotError('Network error. Please try again.');
