@@ -102,8 +102,18 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    try {
+      localStorage.removeItem('user');
+      localStorage.removeItem('navAuthUser');
+      localStorage.removeItem('token');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('nbt_active_tab');
+      localStorage.removeItem('nbt_active_tab_state');
+      localStorage.removeItem('quiz_user_answers');
+      sessionStorage.clear();
+      document.cookie = 'hr_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    } catch (_) {}
+    window.location.hash = '/login';
   };
 
   const updateProfile = async (field, value, localOnly = false) => {
