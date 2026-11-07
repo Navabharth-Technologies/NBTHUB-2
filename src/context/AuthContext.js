@@ -28,9 +28,9 @@ export const AuthProvider = ({ children }) => {
         empName: 'Rakesh Gowda H N',
         role: u.role || 'Lead Software Engineer',
         designation: u.designation || u.role || 'Lead Software Engineer',
-        date_of_birth: '30/06/2003',
-        dob: '30/06/2003',
-        dateOfBirth: '30/06/2003'
+        date_of_birth: '22/04/2001',
+        dob: '22/04/2001',
+        dateOfBirth: '22/04/2001'
       };
     }
     if (email === 'raviaradhya46@gmail.com') {

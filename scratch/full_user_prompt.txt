@@ -1,0 +1,270 @@
+<USER_REQUEST>
+# Implement Correct Add Employee and Add Intern Onboarding with Sequential IDs and Automatic Duration Tracking
+
+Analyze the existing NBT Hub project and implement the Add Employee and Add Intern functionality correctly in both HR and PM modules.
+
+**IMPORTANT:** Fix only the New Joinee Onboarding and Intern onboarding workflows. Do not modify unrelated modules, existing employee management functionality, authentication, permissions, or other business logic.
+
+## 1. Frontend – HR and PM Modules
+
+Update the existing components:
+
+- `src/modules/hr/src/components/profile/NewJoineeModule.js`
+- `src/modules/pm/src/components/profile/NewJoineeModule.js`
+
+Both modules must have identical onboarding functionality and use the same backend APIs.
+
+### A. Add Member Options
+
+When the user clicks `+ Add Member`, display two options:
+
+1. Add Employee
+2. Add Intern
+
+Each option must open its own separate form.
+
+Do not combine employee and intern fields into one form.
+
+### B. Add Employee Form
+
+Display these fields:
+
+1. Full Name
+2. Email Address
+3. Phone Number
+4. Designation
+5. Joining Date
+6. Employee ID
+7. Probation Duration – 3 Months
+
+**Employee ID requirements:**
+
+- Automatically retrieve the next available sequential Employee ID from the backend.
+- Follow the existing employee ID format, for example `202526`.
+- Do not generate random IDs or client-side fallback IDs.
+- Allow authorized users to edit the generated ID.
+- Validate edited IDs against all relevant existing employee and onboarding records.
+- Prevent duplicate IDs.
+- Do not save the form if ID generation or validation fails.
+- Display a loading indicator while retrieving the ID.
+
+**Duration requirements:**
+
+- Default duration must be exactly 3 calendar months.
+- Display `3 Months Probation`.
+- Do not allow an arbitrary number of days to replace the 3-month duration.
+- Calculate the probation completion date using the joining date and calendar-month calculation.
+- Display the expected probation completion date where appropriate.
+
+### C. Add Intern Form
+
+Display these fields:
+
+1. Full Name
+2. Email Address
+3. Phone Number
+4. Designation
+5. Reporting Manager
+6. Joining Date
+7. Intern ID
+8. Internship Duration – 60 Days (2 Months)
+
+**Intern ID requirements:**
+
+- Retrieve the next available sequential Intern ID from the backend.
+- Follow the existing format, for example `NBTINT001`, `NBTINT002`, `NBTINT003`.
+- Allow authorized users to edit the generated ID.
+- Validate against existing intern IDs and prevent duplicates.
+- Never generate random IDs.
+- Do not use Employee IDs for interns.
+
+**Duration requirements:**
+
+- Default internship duration must be exactly 60 calendar days.
+- Display `60 Days (2 Months)`.
+- Calculate the internship completion date from the joining date.
+- Display the expected completion date.
+- Do not automatically convert an intern before completing the full 60-day period.
+
+## 2. Backend – Sequential ID Generation
+
+File:
+`backend/backend/server.js`
+
+Inspect the existing database schema and employee/intern creation APIs before implementing changes.
+
+Implement or correct server-side ID generation APIs.
+
+Suggested endpoints:
+
+- `GET /api/users/next-id` – retrieve the next available Employee ID.
+- `GET /api/interns/next-id` – retrieve the next available Intern ID.
+
+The employee endpoint must check the relevant existing employee and onboarding records to identify the highest valid numeric Employee ID.
+
+The intern endpoint must independently check existing intern identifiers and return the next sequential ID.
+
+Example responses:
+
+Employee:
+`{ "nextEmployeeId": "202526" }`
+
+Intern:
+`{ "nextInternId": "NBTINT001" }`
+
+Requirements:
+
+- Generate IDs on the backend, never randomly on the frontend.
+- Handle missing or empty tables safely.
+- Prevent duplicate IDs during simultaneous employee or intern registrations.
+- Use database transactions or an appropriate atomic ID allocation mechanism.
+- Revalidate IDs during final form submission.
+- Respect existing database constraints and ID formats.
+- Do not assume that checking the highest ID alone guarantees uniqueness under concurrent requests.
+
+## 3. Employee Probation Tracking – 3 Calendar Months
+
+When a new employee is registered:
+
+- Save the employee onboarding information in the correct existing database table.
+- Store the generated Employee ID.
+- Store the joining date.
+- Store the probation duration as 3 months.
+- Calculate the probation completion date using calendar months, not a fixed 90-day calculation.
+- Maintain the existing employee account and password if one already exists.
+
+Automatic processing:
+
+- Check employees whose probation completion date has been reached.
+- Update their onboarding/probation status according to the existing application workflow.
+- Ensure the employee appears correctly under Active Employees when eligible.
+- Do not create duplicate user or employee records.
+- Do not overwrite existing credentials or employee information.
+- Preserve the onboarding history for auditing.
+
+## 4. Intern Duration Tracking – 60 Days
+
+When a new intern is registered:
+
+- Save the intern information in the existing `interns` table.
+- Store the Intern ID.
+- Store the joining date.
+- Store the internship duration as 60 days.
+- Calculate the completion date accurately.
+- Preserve the reporting manager and other existing intern information.
+
+Automatic conversion:
+
+- Check only eligible interns who have completed the full 60-day duration.
+- Verify that the intern is still active and has not already been converted.
+- Allocate a unique sequential Employee ID.
+- Create or link the required employee account using the existing database relationships.
+- Preserve the original Intern ID in the appropriate employee profile/history field.
+- Update the intern status to `Converted`.
+- Make the converted employee visible in Active Employees in both HR and PM modules.
+- Never delete the original intern record.
+- Never overwrite an existing password.
+- Ensure conversion happens only once, even if the scheduled job runs repeatedly.
+
+Use the existing scheduled-job infrastructure if available. If a new daily job is required, configure it according to the project's existing timezone and scheduling conventions.
+
+## 5. Candidate Card Display
+
+Update employee and intern onboarding cards.
+
+**Employee card:**
+- Full Name
+- Employee ID
+- Designation
+- Joining Date
+- Duration: 3 Months Probation
+- Probation Completion Date
+- Current onboarding status
+
+**Intern card:**
+- Full Name
+- Intern ID
+- Designation
+- Reporting Manager
+- Joining Date
+- Duration: 60 Days Internship
+- Internship Completion Date
+- Current internship status
+
+Ensure that Employee ID and Intern ID are clearly distinguishable.
+
+## 6. Database Safety – Mandatory
+
+Before modifying database operations:
+
+1. Inspect the actual table structures and existing relationships.
+2. Reuse existing columns and APIs wherever possible.
+3. Do not create unnecessary duplicate tables.
+4. Do not execute blanket DELETE operations.
+5. Do not delete existing employee or intern records.
+6. Do not regenerate or overwrite passwords.
+7. Do not modify existing employee IDs.
+8. Do not change unrelated employee, HR, PM, payroll, or authentication functionality.
+9. Use transactions for account creation and conversion.
+10. Ensure the conversion process is idempotent.
+
+If the actual database schema differs from the proposed structure, adapt the implementation to the existing schema instead of blindly adding or renaming columns.
+
+## 7. Production API Integration
+
+Use the existing centralized API client and configured deployed backend base URL:
+
+`https://nbthub.navabharathtechnologies.com`
+
+Do not introduce localhost API calls or hardcoded alternative backend URLs.
+
+Verify that both HR and PM modules use the deployed backend APIs correctly.
+
+## 8. Testing and Verification
+
+Test the following scenarios:
+
+1. Add an employee and verify automatic Employee ID generation.
+2. Add another employee and verify sequential ID generation.
+3. Add an intern and verify automatic Intern ID generation.
+4. Add another intern and verify sequential ID generation.
+5. Edit an ID and verify duplicate validation.
+6. Verify that employee probation duration is exactly 3 calendar months.
+7. Verify that intern duration is exactly 60 calendar days.
+8. Verify completion-date calculations using different joining dates, including month-end dates.
+9. Verify that an intern cannot be converted before completing 60 days.
+10. Verify that an eligible intern is converted only once.
+11. Verify that existing employee passwords remain unchanged.
+12. Verify that converted interns retain their historical records.
+13. Verify that both HR and PM display the same IDs, duration, and onboarding statuses.
+14. Verify that existing Active Employees functionality continues to work.
+
+Run the frontend build and backend syntax checks.
+
+## 9. Final Implementation Restrictions
+
+- Do not redesign the entire HR or PM interface.
+- Do not modify unrelated modules.
+- Do not remove existing working features.
+- Do not replace existing database logic without understanding its dependencies.
+- Do not use random ID generation.
+- Do not create duplicate employee accounts.
+- Do not make destructive database changes.
+- Do not claim completion without testing.
+
+**Expected result:** HR and PM must support two independent onboarding workflows: Add Employee with a sequential Employee ID and 3-month probation, and Add Intern with a sequential Intern ID and 60-day internship. Both workflows must calculate durations accurately, preserve existing data, and support safe automatic status updates and conversion.
+then complete the employee as 3 months then intern completes 60 days then automatically shows in employee active list so carefully fixed this then  one more thing is data base use the base url and applicatuon is already hosted so updated change i click the nbthub.in this url to updated the chnages so carefully fixed this i mentioned backend must be used the deployed base url
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-05T09:19:17+05:30.
+
+The user's current state is as follows:
+Active Document: c:\Users\Shobha\OneDrive\Desktop\NBT HUB\NBT_HUB_OG\NBT_HUB_OG\.env (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 4
+Other open documents:
+- c:\Users\Shobha\OneDrive\Desktop\NBT HUB\NBT_HUB_OG\NBT_HUB_OG\.gitignore (LANGUAGE_UNSPECIFIED)
+- c:\Users\Shobha\OneDrive\Desktop\NBT HUB\NBT_HUB_OG\NBT_HUB_OG\scratch\fix_db.js (LANGUAGE_UNSPECIFIED)
+- c:\Users\Shobha\OneDrive\Desktop\NBT HUB\NBT_HUB_OG\NBT_HUB_OG\scratch\insert_rakesh.js (LANGUAGE_UNSPECIFIED)
+- c:\Users\Shobha\OneDrive\Desktop\NBT HUB\NBT_HUB_OG\NBT_HUB_OG\scratch\test_login_logic.js (LANGUAGE_UNSPECIFIED)
+- c:\Users\Shobha\OneDrive\Desktop\NBT HUB\NBT_HUB_OG\NBT_HUB_OG\scratch\setup_nbt_db.js (LANGUAGE_UNSPECIFIED)
+</ADDITIONAL_METADATA>
