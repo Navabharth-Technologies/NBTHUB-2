@@ -18,6 +18,21 @@ export const AuthProvider = ({ children }) => {
   const adjustLoggedUser = (u) => {
     if (!u) return u;
     const email = String(u.email || u.email_id || '').toLowerCase().trim();
+    const empId = String(u.employee_id || u.id || u.empId || '').trim();
+    if (empId === '202512' || email === 'rakesh@navabharathtechnologies.com') {
+      return {
+        ...u,
+        name: 'Rakesh Gowda H N',
+        user_name: 'Rakesh Gowda H N',
+        employee_name: 'Rakesh Gowda H N',
+        empName: 'Rakesh Gowda H N',
+        role: u.role || 'Lead Software Engineer',
+        designation: u.designation || u.role || 'Lead Software Engineer',
+        date_of_birth: '30/06/2003',
+        dob: '30/06/2003',
+        dateOfBirth: '30/06/2003'
+      };
+    }
     if (email === 'raviaradhya46@gmail.com') {
       return {
         ...u,
